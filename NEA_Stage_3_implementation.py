@@ -2,26 +2,13 @@
 class NEA(object):
     def implementation(self):
         cbw = 0
-        # Predefined process: Input
 
-        def input_data():
+        # Predefined process: Input
+        def input_data(value):
             # All the different types of coin, bags, coin weights. All these values are linked.
             coin_types = [2,    1,    0.5, 0.2, 0.1,  0.05, 0.02, 0.01]  # In pounds
             bag_values = [20,   20,   10,  10,  5,    5,    1,    1]  # In pounds
             coin_weights = [12, 8.75, 8,   5,   6.5,  3.25, 7.12, 3.56]  # In grams
-
-            # Predefined process: Calculations
-            def calculations(value):
-                # Connecting all the three values. Mega because it's important. Pos because it's the position in list.
-                mega_pos = coin_types.index(coin_type)
-
-                bag_value = bag_values[mega_pos]
-                coin_weight = coin_weights[mega_pos]
-
-                value += (bag_value/coin_type) * coin_weight
-
-            calculations(cbw)
-            # calculation function has been done!
 
             validity = False
 
@@ -43,7 +30,19 @@ class NEA(object):
 
             # coin type AND name has been validated!
 
-        input_data()
+            input_data(0)
+        # Predefined process: Calculations
+
+        # Connecting all the three values. Mega because it's important. Pos because it's the position in list
+            mega_pos = coin_types.index(coin_type)
+
+            bag_value = bag_values[mega_pos]
+            coin_weight = coin_weights[mega_pos]
+
+            value += (bag_value/coin_type) * coin_weight
+
+            # calculation function has been done!
+        input_data(0)
 
         def main_menu():
             print("")
