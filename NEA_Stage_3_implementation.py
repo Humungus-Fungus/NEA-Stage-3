@@ -1,20 +1,18 @@
 # NEA Stage 3: Implementation
 class NEA(object):
     def implementation(self):
-        cbw = 0
-
         # Predefined process: Input
-        def input_data(value):
-            # All the different types of coin, bags, coin weights. All these values are linked.
-            coin_types = [2,    1,    0.5, 0.2, 0.1,  0.05, 0.02, 0.01]  # In pounds
-            bag_values = [20,   20,   10,  10,  5,    5,    1,    1]  # In pounds
-            coin_weights = [12, 8.75, 8,   5,   6.5,  3.25, 7.12, 3.56]  # In grams
+        def input_data():
 
-            validity = False
+            invalid = True
 
             # While validity is not true...
-            while not validity:
+            while invalid:
                 v_name, coin_type, bag_weight = input("Name: "), int(input("Coin Type: ")), int(input("Bag Weight: "))
+
+                coin_types = [2,    1,    0.5, 0.2, 0.1,  0.05, 0.02, 0.01]  # In pounds
+                bag_values = [20,   20,   10,  10,  5,    5,    1,    1]  # In pounds
+                coin_weights = [12, 8.75, 8,   5,   6.5,  3.25, 7.12, 3.56]  # In grams
 
                 # if coin_type is not a valid one...
                 if coin_type not in coin_types:
@@ -26,26 +24,40 @@ class NEA(object):
                     print("Invalid name. Please try again.")
 
                 elif coin_type in coin_types:
-                    validity = True
+                    invalid = False
+                    print("Valid")
 
             # coin type AND name has been validated!
 
-            input_data(0)
-        # Predefined process: Calculations
+            # Predefined process: Calculations
+            def calculations():
+                # Connecting all the three values.
+                mega_pos = coin_types.index(coin_type)
 
-        # Connecting all the three values. Mega because it's important. Pos because it's the position in list
-            mega_pos = coin_types.index(coin_type)
+                # Correct bag weight
+                cbw = 0
+                bag_value = bag_values[mega_pos]
+                coin_weight = coin_weights[mega_pos]
 
-            bag_value = bag_values[mega_pos]
-            coin_weight = coin_weights[mega_pos]
+                cbw += (bag_value/coin_type) * coin_weight
+                print(bag_weight)
 
-            value += (bag_value/coin_type) * coin_weight
+                weight_diff = bag_weight - cbw
 
-            # calculation function has been done!
-        input_data(0)
+                coin_diff = weight_diff/coin_weight
 
-        def main_menu():
-            print("")
+                # calculation function has been done!
+
+                if coin_diff == 0:
+                    print("Donated successfully")
+                    bags += 1
+
+            calculations()
+        input_data()
+
+        if coin_diff == 0:
+            print("Donated successfully")
+            bags += 1
 
 my_NEA = NEA()
 my_NEA.implementation()
