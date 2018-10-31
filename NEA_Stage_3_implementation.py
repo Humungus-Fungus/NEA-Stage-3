@@ -48,6 +48,8 @@ class NEA(object):
 
                 # calculation function has been done!
 
+                bags = 0
+
                 if coin_diff == 0:
                     print("Donated successfully")
                     bags += 1
@@ -55,9 +57,6 @@ class NEA(object):
             calculations()
         input_data()
 
-        if coin_diff == 0:
-            print("Donated successfully")
-            bags += 1
 
 my_NEA = NEA()
 my_NEA.implementation()
