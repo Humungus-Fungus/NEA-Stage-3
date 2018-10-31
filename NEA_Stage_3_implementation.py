@@ -17,15 +17,16 @@ class NEA(object):
                 # if coin_type is not a valid one...
                 if coin_type not in coin_types:
                     # Not changing validity
-                    print("Incorrect coin type. Please try again.")
+                    print("ERROR: Invalid coin type (2nd input). Please try again.")
 
                 elif not v_name.isalpha():
                     # Not changing validity
-                    print("Invalid name. Please try again.")
+                    print("ERROR: Invalid name (1st input). Please refrain from using numbers/symbols in your name and"
+                          " try again.")
 
                 elif coin_type in coin_types:
                     invalid = False
-                    print("Valid")
+                    print("✓\n")
 
             # coin type AND name has been validated!
 
@@ -40,12 +41,13 @@ class NEA(object):
                 coin_weight = coin_weights[mega_pos]
 
                 cbw += (bag_value/coin_type) * coin_weight
-                print(bag_weight)
+                print('bag weight: ' + str(bag_weight))
+                print('cbw: ' + str(cbw))
 
                 weight_diff = bag_weight - cbw
-
+                print('weight_diff: ' + str(weight_diff))
                 coin_diff = weight_diff/coin_weight
-
+                print('coin_diff: ' + str(coin_diff))
                 # calculation function has been done!
 
                 bags = 0
