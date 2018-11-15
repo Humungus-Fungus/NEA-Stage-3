@@ -8,7 +8,7 @@ class NEA(object):
             def main_menu():
                 print("██████████████████")
                 print("█ > Donate to charity(1)     █")
-                print("█ > Open stats(2)             █")
+                print("█ > Open stats(2)            █")
                 print("█ > Quit(3)                  █")
                 print("██████████████████\n")
 
@@ -31,17 +31,16 @@ class NEA(object):
                         global bag_values
                         global coin_weights
 
-                        incorrect = True
+                        increment = ['1']
 
-                        while incorrect:
-                            v_name, coin_type, bag_weight = input("Name: "), float(input("Coin Type: ")),\
+                        for i in increment:
+                            try:
+                                v_name, coin_type, bag_weight = input("Name: "), float(input("Coin Type: ")),\
                                                                 float(input("Bag Weight: "))
-                            if ValueError:
-                                pass
-                                #Ill work on this later
-
-
-                        # Now incorrect is False
+                            except ValueError:
+                                # Constantly increasing the size of the list, so the above code is run until correct.
+                                n = 'increm'
+                                increment.append(n)
 
                         coin_types = [2,    1,    0.5, 0.2, 0.1,  0.05, 0.02, 0.01]  # In pounds
                         bag_values = [20,   20,   10,  10,  5,    5,    1,    1]  # In pounds
@@ -79,8 +78,6 @@ class NEA(object):
                     coin_weight = coin_weights[mega_pos]
 
                     cbw += (bag_value/coin_type) * coin_weight
-                    print('bag weight: ' + str(bag_weight))
-                    print('cbw: ' + str(cbw))
 
                     global weight_diff
                     weight_diff = bag_weight - cbw
@@ -105,13 +102,23 @@ class NEA(object):
                                 self.implementation()
 
                         elif weight_diff < 0:
-                            print("Your submitted bag weight is %s grams lighter than the real value. Add %s coin"
-                                  "s." % abs(weight_diff), round(weight_diff/coin_weight))
-                            add_or_no = input("Add %s grams? (y/n)" % abs(weight_diff))
-                            if add_or_no == 'y':
-                                print("Adding %s grams..." % abs(weight_diff))
-                                weight_diff = 0
-                                print("Added!")
+                            weight_diff = int(weight_diff)
+                            coin_weight = int(coin_weight)
+                            print("Your submitted bag weight is " + str(abs(weight_diff)) + " grams lighter than the re"
+                                  "al value. Add " + str(abs(weight_diff)) + " grams.")
+                            add_or_no = input("Added %s grams yet? (y/n)" % str(abs(weight_diff)))
+
+                            loop = True
+
+                            while loop:
+                                if add_or_no == 'y':
+                                    print('Great coin slotting skills!')
+                                    loop = False
+                                elif add_or_no == 'n':
+                                    print('Well get on with it!')
+                                    add_or_no = input("Added %s grams yet? (y/n)" % str(abs(weight_diff)))
+
+                                    # Keeping the loop alive
 
                 calculations()
             main_menu()
@@ -139,7 +146,8 @@ class NEA(object):
         increment = 1
         with open('CoinCount.txt', 'r+') as coin_count:
             coin_count.write('ENTRY ' + str(increment) + ': Volunteer Name: ' + v_name + ', Donated amount: ' +
-                             str(coin_type * bag_weight/coin_weight) + 'Accuracy: ')
+                             str(bag_weight/coin_weight) + 'Accuracy: ')
             increment += 1
 my_NEA = NEA()
 my_NEA.implementation()
+my_NEA.coin_count_stuff()
