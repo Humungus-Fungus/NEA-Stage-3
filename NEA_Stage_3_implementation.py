@@ -71,6 +71,7 @@ class NEA(object):
                     mega_pos = coin_types.index(coin_type)
 
                     # Correct bag weight
+                    global cbw
                     cbw = 0
                     bag_value = bag_values[mega_pos]
 
@@ -114,6 +115,7 @@ class NEA(object):
                                 if add_or_no == 'y':
                                     print('Great coin slotting skills!')
                                     loop = False
+                                    thingy = 'off'
                                 elif add_or_no == 'n':
                                     print('Well get on with it!')
                                     add_or_no = input("Added %s grams yet? (y/n)" % str(abs(weight_diff)))
@@ -146,7 +148,7 @@ class NEA(object):
         increment = 1
         with open('CoinCount.txt', 'r+') as coin_count:
             coin_count.write('ENTRY ' + str(increment) + ': Volunteer Name: ' + v_name + ', Donated amount: ' +
-                             str(bag_weight/coin_weight) + 'Accuracy: ')
+                             str(bag_weight) + ' grams. Accuracy: ' + str((bag_weight/cbw) * 100) + '%')
             increment += 1
 my_NEA = NEA()
 my_NEA.implementation()
