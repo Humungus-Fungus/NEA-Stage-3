@@ -100,27 +100,39 @@ class NEA(object):
                             # Go back to menu.
                             elif more_bags == 'y':
 
-                                self.implementation()
+                                input_data()
 
                         elif weight_diff < 0:
-                            weight_diff = int(weight_diff)
+                            weight_diff = abs(int(weight_diff))
                             coin_weight = int(coin_weight)
-                            print("Your submitted bag weight is " + str(abs(weight_diff)) + " grams lighter than the re"
-                                  "al value. Add " + str(abs(weight_diff)) + " grams.")
-                            add_or_no = input("Added %s grams yet? (y/n)" % str(abs(weight_diff)))
+                            print("Your submitted bag weight is %d grams lighter than the real value. Add %d grams."
+                                  % (weight_diff, weight_diff))
+                            add_or_no = input("Added %d grams yet? (y/n)" % weight_diff)
 
-                            loop = True
-
-                            while loop:
+                            while True:
                                 if add_or_no == 'y':
                                     print('Great coin slotting skills!')
-                                    loop = False
-                                    thingy = 'off'
+                                    break
                                 elif add_or_no == 'n':
                                     print('Well get on with it!')
-                                    add_or_no = input("Added %s grams yet? (y/n)" % str(abs(weight_diff)))
+                                    add_or_no = input("Added %d grams yet? (y/n)" % weight_diff)
+                                    # Keeping the loop alive (no -break-s)
 
-                                    # Keeping the loop alive
+                        elif weight_diff > 0:
+                            weight_diff = abs(int(weight_diff))
+                            coin_weight = int(coin_weight)
+                            print("Your submitted bag weight is %d grams lighter than the real value. Add %d grams." %
+                                  (weight_diff, weight_diff))
+                            remove_or_no = input("Removed %d grams yet? (y/n)" % weight_diff)
+
+                            while True:
+                                if remove_or_no == 'y':
+                                    print("Great coin pulling skills!")
+                                    break
+                                elif remove_or_no == 'n':
+                                    print('Well get on with it!')
+                                    remove_or_no = input('Removed %d grams yet? (y/n)' % weight_diff)
+                                    # Keeping the loop alive (notice the lack of -break-ing)
 
                 calculations()
             main_menu()
@@ -146,7 +158,7 @@ class NEA(object):
 
     def coin_count_stuff(self):
         increment = 1
-        with open('CoinCount.txt', 'r+') as coin_count:
+        with open('CoinCount.txt', 'w') as coin_count:
             coin_count.write('ENTRY ' + str(increment) + ': Volunteer Name: ' + v_name + ', Donated amount: ' +
                              str(bag_weight) + ' grams. Accuracy: ' + str((bag_weight/cbw) * 100) + '%')
             increment += 1
