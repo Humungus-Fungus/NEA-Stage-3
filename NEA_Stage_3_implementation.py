@@ -143,7 +143,12 @@ class NEA(object):
                     break
                 elif option == str(2):
                     with open('CoinCount.txt', 'r') as coin_count:
-                        print(coin_count.read())
+                        cc_lines = coin_count.readlines()
+                        while '\n' in cc_lines:
+                            cc_lines.remove('\n')
+                        for i in cc_lines:
+                            i.append('\n')
+                        print(cc_lines)
                     break
                 elif option == str(3):
                     # Close program
@@ -154,13 +159,18 @@ class NEA(object):
                     pass
         main()
 
-    def coin_count_stuff(self):
+
+def coin_count_stuff():
         with open('CoinCount.txt', 'a') as coin_count:
-            coin_count.write('\nENTRY : Volunteer Name: ' + v_name + ', Donated amount (submitted): ' +
-                             str(bag_weight) + ', Donated amount(actual):' + str(cbw) + ' grams. Accuracy: ' +
-                             str((bag_weight/cbw) * 100) + '%')
+            try:
+                coin_count.write('\nENTRY : Volunteer Name: ' + v_name + ', Donated amount (submitted): ' +
+                                 str(bag_weight) + ', Donated amount(actual):' + str(cbw) + ' grams. Accuracy: ' +
+                                 str((bag_weight/cbw) * 100) + '%')
+            except NameError:
+                pass
+
 my_NEA = NEA()
 
 while True:
     my_NEA.implementation()
-    my_NEA.coin_count_stuff()
+    coin_count_stuff()
