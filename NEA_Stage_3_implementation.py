@@ -147,8 +147,8 @@ class NEA(object):
                         while '\n' in cc_lines:
                             cc_lines.remove('\n')
                         for i in cc_lines:
-                            i.append('\n')
-                        print(cc_lines)
+                            i += '\n'
+                            print(i)
                     break
                 elif option == str(3):
                     # Close program
